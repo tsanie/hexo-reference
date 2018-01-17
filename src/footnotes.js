@@ -1,5 +1,6 @@
 'use strict';
 
+var htmlToText = require('html-to-text');
 var md = require('markdown-it')({
     // allow HTML tags
     html: true
@@ -53,10 +54,11 @@ function renderFootnotes(text) {
     text = text.replace(reFootnoteIndex,
         function(match, index){
             var tooltip = indexMap[index].content;
+            var text = htmlToText.fromString(md.renderInline(tooltip));
             return '<sup id="fnref:' + index + '">' +
                 '<a href="#fn:'+ index +'" rel="footnote">' +
                 '<span class="hint--top-right hint--error hint--large" aria-label="'
-                + tooltip +
+                + decodeURIComponent(text).replace('"', '\\"') +
                 '">[' + index +']</span></a></sup>';
         });
 
@@ -67,13 +69,13 @@ function renderFootnotes(text) {
 
     // render footnotes (HTML)
     footnotes.forEach(function (footNote) {
-        html += '<li id="fn:' + footNote.index + '">';
+        html += '<li id="fn:' + footNote.index + '" style="list-style: none">';
         html += '<span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">';
         html += footNote.index;
         html += '.</span>';
-        html += '<span style="display: inline-block; vertical-align: top; margin-left: 10px;">';
+        html += '<span style="display: inline-block; vertical-align: top; margin-left: 10px">';
         html += md.renderInline(footNote.content.trim());
-        html += '<a href="#fnref:' + footNote.index + '" rev="footnote"> ↩</a></span></li>';
+        html += '<a href="#fnref:' + footNote.index + '" rev="footnote" style="margin-left: 6px">&#8617;</a></span></li>';
     });
 
     // add footnotes at the end of the content
