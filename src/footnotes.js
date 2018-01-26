@@ -1,6 +1,6 @@
 'use strict';
 
-var htmlToText = require('html-to-text');
+var stripHtml = require('hexo-util').stripHTML;
 var md = require('markdown-it')({
     // allow HTML tags
     html: true
@@ -54,7 +54,7 @@ function renderFootnotes(text) {
     text = text.replace(reFootnoteIndex,
         function(match, index){
             var tooltip = indexMap[index].content;
-            var text = htmlToText.fromString(md.renderInline(tooltip));
+            var text = stripHtml(md.renderInline(tooltip));
             return '<sup id="fnref:' + index + '">' +
                 '<a href="#fn:'+ index +'" rel="footnote">' +
                 '<span class="hint--top-right hint--error hint--large" aria-label="'

@@ -35,8 +35,7 @@
     "mocha-lcov-reporter": "^1.2.0"
   },
   "dependencies": {
-    "html-to-text": "^3.3.0",
-    "markdown-it": "^8.1.0",
-    "hexo-util": "^0.6.0"
+    "hexo-util": "^0.6.0",
+    "markdown-it": "^8.1.0"
   }
 }

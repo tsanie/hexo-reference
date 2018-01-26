@@ -61,7 +61,7 @@ describe('footnotes', function() {
   it('render (with markdown content)', function() {
     var content = footnotes('hey buddy[^13], it\'s a test [^13]: basic footnote [content](http://example.com)');
     content.should.equal(
-      'hey buddy<sup id="fnref:13"><a href="#fn:13" rel="footnote"><span class="hint--top-right hint--error hint--large" aria-label="basic footnote content [http://example.com]">[13]</span></a></sup>, it\'s a test ' +
+      'hey buddy<sup id="fnref:13"><a href="#fn:13" rel="footnote"><span class="hint--top-right hint--error hint--large" aria-label="basic footnote content">[13]</span></a></sup>, it\'s a test ' +
       '<div id="footnotes">' +
       '<hr>' +
       '<div id="footnotelist">' +
