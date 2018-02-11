@@ -4,6 +4,9 @@ var renderFootnotes = require('./src/footnotes'),
 
 // Add CDN CSS resources
 var css_link = ref.cdn || 'https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css';
+if (css_link[0] === '/' && css_link[1] !== '/') {
+  css_link = hexo.config.root + css_link.substring(1);
+}
 
 // Register footnotes filter
 hexo.extend.filter.register('before_post_render', function(data) {
